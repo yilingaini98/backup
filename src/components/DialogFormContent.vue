@@ -1,11 +1,9 @@
 <template>
     <el-form ref="form"
              label-width="80px"
-
     >
         <el-form-item :label=item.label
                       v-for="item in dialogformcontent"
-
         >
             <el-input  v-if="item.type=='string'"
                        type="input"
@@ -24,6 +22,11 @@
                       size="medium"
                       v-model=item.value
             ></el-input>
+            <el-switch v-else-if="item.type=='switch'"
+                      size="medium"
+                      v-model=item.value
+                       style="text-align:left"
+            ></el-switch>
         </el-form-item>
     </el-form>
 </template>

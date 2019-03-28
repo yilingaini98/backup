@@ -1,8 +1,8 @@
 ﻿//引入mockjs
 const Mock = require('mockjs');
 
-//使用mockjs模拟数据
-Mock.mock('/api/company', (req, res) => {
+//公司管理数据
+Mock.mock('/api/Company', (req, res) => {
     return Mock.mock([
         {
             'data|10-31':[{
@@ -16,8 +16,28 @@ Mock.mock('/api/company', (req, res) => {
         },
         {
             'pageparam':{
-                // currentPage: 1,
                 records: '@natural(1, 500)',
+            }
+        }
+    ])
+});
+
+//数据字典数据
+Mock.mock('/api/DataDictionary', (req, res) => {
+    return Mock.mock([
+        {
+            'data|10-31':[{
+                ItemName: '@natural',
+                ItemValue: '@name',
+                Simplicity: '@date("yyyy-MM-dd")',
+                Sortable:'@name',
+                EnabledMark:'true',
+                Mark:'@zip'
+            }]
+        },
+        {
+            'pageparam':{
+                records: '@natural(1, 30)',
             }
         }
     ])

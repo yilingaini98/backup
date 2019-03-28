@@ -29,3 +29,5 @@ html,body,#app{
 .el-pagination{padding-top:20px;}
 .searchArea .btnGroup{float:right;line-height: 50px;}
 /*main中内容样式结束*/
+
+.el-form-item__content{text-align: left;}/*表格项靠左*/

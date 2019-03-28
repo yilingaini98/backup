@@ -24,7 +24,7 @@ const getFormData={
   },
   mutations:{
     getData(state,searchCriteria){//传入搜索条件，axios查询
-      axios.post('/api/company',JSON.stringify(searchCriteria))
+      axios.post('/api/'+searchCriteria.pagePath,JSON.stringify(searchCriteria))
       .then(res => {
           state.resData=res.data[0].data;
           state.records=res.data[1].pageparam.records;

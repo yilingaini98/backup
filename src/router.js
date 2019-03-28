@@ -31,6 +31,11 @@ export default new Router({
           name: 'RoleManager',
           component: () => import('./views/Organization/RoleManager')
         },
+        {
+          path: '/DataDictionary',
+          name: 'RoleManager',
+          component: () => import('./views/System/DataDictionary')
+        },
       ]
     },
   ]

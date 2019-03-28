@@ -26,7 +26,7 @@
                    <span slot="title">系统设置</span>
                </template>
                <el-menu-item-group>
-                   <el-menu-item index="/Company">数据字典</el-menu-item>
+                   <el-menu-item index="/DataDictionary">数据字典</el-menu-item>
                </el-menu-item-group>
            </el-submenu>
        </el-menu>

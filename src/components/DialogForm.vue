@@ -2,7 +2,7 @@
     <el-dialog
             :title="dialogtitle"
             :visible.sync="dialogisvisible"
-            width="40%"
+            width="50%"
             :before-close="handleClose">
         <span>
             <alDialogFormContent  :dialogformcontent="fullFields"></alDialogFormContent>

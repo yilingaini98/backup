@@ -2,23 +2,25 @@
     <div>
        <div class="searchArea">
           <div class="searchGroup">
-             <div>
-                 <span class="searchContent">选择条件</span>
-                 <el-select v-model="selectValue" placeholder="请选择" size="small">
-                     <el-option
-                             v-for="item in tableHeader"
-                             :key="item.prop"
-                             :label="item.label"
-                             :value="item.prop">
-                     </el-option>
-                 </el-select>
-             </div>
-              <div>
-                  <el-input v-model="searchContent" placeholder="请输入内容" size="small"></el-input>
-              </div>
-              <div>
-                  <el-button type="primary" size="small" @click="search">查询</el-button>
-              </div>
+              <el-form :inline="true"  class="demo-form-inline">
+                  <el-form-item  label="选择条件">
+                      <el-select v-model="selectValue" placeholder="请选择" size="small">
+                          <el-option
+                              v-for="item in tableHeader"
+                              :key="item.prop"
+                              :label="item.label"
+                              :value="item.prop"
+                          >
+                          </el-option>
+                      </el-select>
+                  </el-form-item>
+                  <el-form-item>
+                      <el-input v-model="searchContent" placeholder="请输入内容" size="small"></el-input>
+                  </el-form-item>
+                  <el-form-item>
+                      <el-button type="primary" @click="search" size="small">查询</el-button>
+                  </el-form-item>
+              </el-form>
           </div>
 
            <div class="btnGroup">
@@ -70,13 +72,13 @@
                     label:"公司性质",
                     type:"string",
                     value:"",
-                    width:"200",
+                    width:"150",
                 },{
                     prop:"C_FoundedDate",
                     label:"成立时间",
                     type:"date",
                     value:"",
-                    width:"200",
+                    width:"150",
                 },{
                     prop:"C_Manager",
                     label:"负责人",
@@ -88,7 +90,7 @@
                     label:"经营范围",
                     type:"string",
                     value:"",
-                    width:"300",
+                    width:"200",
                 },{
                     prop:"C_Mark",
                     label:"备注",
@@ -126,6 +128,7 @@
                     content:this.searchContent,
                     pageSize:this.pageSize,
                     currentPage:this.currentPage,
+                    pagePath:"Company"
                 };
                 this.$store.commit("getData",param);
             },

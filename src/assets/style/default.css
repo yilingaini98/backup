@@ -13,6 +13,10 @@ html,body,#app{
 .el-scrollbar__wrap {overflow-x: hidden;}/*去除横向滚动条*/
 .el-scrollbar__view{height: 100%;}
 .el-scrollbar__wrap{overflow-x: hidden!important;}
+::-webkit-scrollbar {width: 6px;height: 6px; }/*滚动条的宽度*/
+::-webkit-scrollbar-thumb {background-color: rgba(43,43,43,0.2);border-radius: 10px;}/*滚动条的滑块*/
+
+
 
 .el-menu-vertical-demo{height: 100%;}
 .el-menu-vertical-demo:not(.el-menu--collapse) {width: 200px;min-height: 400px;}

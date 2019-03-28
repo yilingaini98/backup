@@ -4,67 +4,150 @@
           <div class="searchGroup">
              <div>
                  <span class="searchContent">选择条件</span>
-                 <el-select v-model="value" placeholder="请选择" size="small">
+                 <el-select v-model="selectValue" placeholder="请选择" size="small">
                      <el-option
-                             v-for="item in options"
-                             :key="item.value"
+                             v-for="item in tableHeader"
+                             :key="item.prop"
                              :label="item.label"
-                             :value="item.value">
+                             :value="item.prop">
                      </el-option>
                  </el-select>
              </div>
               <div>
-                  <el-input v-model="input" placeholder="请输入内容" size="small"></el-input>
+                  <el-input v-model="searchContent" placeholder="请输入内容" size="small"></el-input>
               </div>
               <div>
-                  <el-button type="primary" size="small">查询</el-button>
+                  <el-button type="primary" size="small" @click="search">查询</el-button>
               </div>
           </div>
 
            <div class="btnGroup">
                <el-button-group>
-                   <el-button icon="el-icon-edit" size="small"></el-button>
-                   <el-button icon="el-icon-edit-outline" size="small"></el-button>
+                   <el-button icon="el-icon-edit" size="small" @click="newDialogForm"></el-button>
+                   <el-button icon="el-icon-edit-outline" size="small" @click="editDialogForm"></el-button>
                    <el-button icon="el-icon-delete" size="small"></el-button>
                </el-button-group>
            </div>
        </div>
 
-        <alForm></alForm>
+        <alForm :extendheader="tableHeader"
+                :extenddata="tableData"
+                :extendrecords="totalPage"
+                @handlecurrentchange="getcurrentPage"
+                @handlesizechange="getpageSize"
+        ></alForm>
+
+        <alDialogForm
+                :dialogisvisible="dialogVisible"
+                :dialogtitle="dialogTitle"
+                :dialogcontent="dialogContent"
+                @handleclosedialog="changeDialogStatus"
+        ></alDialogForm>
     </div>
 </template>
 
 <script>
     import alForm from '../../components/Form'
+    import alDialogForm from '../../components/DialogForm'
     export default {
         name: "Company",
         components:{
-            alForm
+            alForm,
+            alDialogForm
         },
         data(){
             return{
-                input: '',
-                options: [{
-                    value: '选项1',
-                    label: '黄金糕'
-                }, {
-                    value: '选项2',
-                    label: '双皮奶'
-                }, {
-                    value: '选项3',
-                    label: '蚵仔煎'
-                }, {
-                    value: '选项4',
-                    label: '龙须面'
-                }, {
-                    value: '选项5',
-                    label: '北京烤鸭'
+                selectValue: '',
+                searchContent: '',
+                tableHeader:[{
+                    prop:"C_FullName",
+                    label:"公司名称",
+                    type:"string",
+                    value:"",
+                    width:"150",
+                },{
+                    prop:"C_Nature",
+                    label:"公司性质",
+                    type:"string",
+                    value:"",
+                    width:"200",
+                },{
+                    prop:"C_FoundedDate",
+                    label:"成立时间",
+                    type:"date",
+                    value:"",
+                    width:"200",
+                },{
+                    prop:"C_Manager",
+                    label:"负责人",
+                    type:"string",
+                    value:"",
+                    width:"150",
+                },{
+                    prop:"C_BusinessScope",
+                    label:"经营范围",
+                    type:"string",
+                    value:"",
+                    width:"300",
+                },{
+                    prop:"C_Mark",
+                    label:"备注",
+                    type:"textarea",
+                    value:"",
+                    width:"150",
                 }],
-                value: '',
+                pageSize:"30",//每页的数据条数
+                currentPage:"1",//默认开始页
+                dialogVisible: false,
+                dialogTitle:'',//弹层标题
             }
         },
+        computed: {
+            tableData (){
+                let resData = this.$store.state.getFormData.resData;
+                return resData;
+            },
+            totalPage(){
+                let records = this.$store.state.getFormData.records;
+                return records;
+            },
+            dialogContent(){
+                let content = this.tableHeader;
+                return content;
+            },
+        },
+        mounted(){
+            this.search();
+        },
         methods: {
-
+            search(){
+                let param={
+                    selected:this.selectValue,
+                    content:this.searchContent,
+                    pageSize:this.pageSize,
+                    currentPage:this.currentPage,
+                };
+                this.$store.commit("getData",param);
+            },
+            getcurrentPage(currPage){
+                this.currentPage=currPage;
+                this.search();
+            },
+            getpageSize(pageSize){
+                this.pageSize=pageSize;
+                this.search();
+            },
+            newDialogForm(){
+                this.changeDialogStatus();
+                this.dialogTitle="新增";
+            },
+            editDialogForm(){
+                this.changeDialogStatus();
+                this.dialogTitle="编辑";
+            },
+            changeDialogStatus(){
+                this.dialogVisible=!this.dialogVisible;
+            }
         },
     }
 </script>

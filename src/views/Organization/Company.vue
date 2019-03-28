@@ -36,7 +36,7 @@
                 @handlecurrentchange="getcurrentPage"
                 @handlesizechange="getpageSize"
         ></alForm>
-        
+
         <alDialogForm
                 :dialogisvisible="dialogVisible"
                 :dialogtitle="dialogTitle"

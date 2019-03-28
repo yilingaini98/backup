@@ -2,23 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f01565a4-36f0-4363-887f-390ecc566867" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/App.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/assets/style/default.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/DialogForm.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/DialogFormContent.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Form.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/mock.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/permission.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/router.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/store.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/views/Layout/Layout.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/views/Layout/components/Aside.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/views/Layout/components/NavBar.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/views/Organization/Company.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/views/Organization/Department.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/views/Organization/Personnel.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/views/Organization/RoleManager.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/mock.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/mock.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/node_modules/" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -44,20 +28,20 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/mock.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="550">
-              <caret line="31" selection-start-line="31" selection-end-line="31" selection-end-column="34" />
+            <state relative-caret-position="354">
+              <caret line="18" selection-start-line="18" selection-end-line="18" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/views/Organization/Company.vue">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="273">
-              <caret line="38" column="8" selection-start-line="38" selection-start-column="8" selection-end-line="38" selection-end-column="8" />
+              <caret line="38" selection-start-line="38" selection-end-line="38" />
               <folding>
                 <element signature="e#1559#1601#0" expanded="true" />
               </folding>
@@ -173,8 +157,8 @@
       <find>tableHeader</find>
       <find>dialogTitle</find>
       <find>toggleSideBar</find>
-      <find>selectValue</find>
       <find>size-change</find>
+      <find>selectValue</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -519,13 +503,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/mock.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="550">
-          <caret line="31" selection-start-line="31" selection-end-line="31" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/views/Layout/Layout.vue">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="575">
@@ -568,10 +545,17 @@
     <entry file="file://$PROJECT_DIR$/src/views/Organization/Company.vue">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="273">
-          <caret line="38" column="8" selection-start-line="38" selection-start-column="8" selection-end-line="38" selection-end-column="8" />
+          <caret line="38" selection-start-line="38" selection-end-line="38" />
           <folding>
             <element signature="e#1559#1601#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/mock.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="354">
+          <caret line="18" selection-start-line="18" selection-end-line="18" />
         </state>
       </provider>
     </entry>

@@ -20,10 +20,15 @@
                   <el-menu-item index="/RoleManager">角色管理</el-menu-item>
                </el-menu-item-group>
            </el-submenu>
-           <el-menu-item index="2">
-               <i class="el-icon-setting"></i>
-               <span slot="title">系统设置</span>
-           </el-menu-item>
+           <el-submenu index="2">
+               <template slot="title">
+                   <i class="el-icon-setting"></i>
+                   <span slot="title">系统设置</span>
+               </template>
+               <el-menu-item-group>
+                   <el-menu-item index="/Company">数据字典</el-menu-item>
+               </el-menu-item-group>
+           </el-submenu>
        </el-menu>
    </div>
 </template>

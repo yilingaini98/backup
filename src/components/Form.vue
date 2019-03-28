@@ -1,51 +1,29 @@
 <template>
     <div>
         <el-table
-                :data="tableData"
+                :data="extenddata"
+                :max-height="tableHeight"
                 style="width: 100%;"
                 border
                 size="small"
                 highlight-current-row
                 :row-class-name="tableRowClassName">
             <el-table-column
-                    prop="date"
-                    label="部门名称"
-                    width="180">
-            </el-table-column>
-            <el-table-column
-                    prop="name"
-                    label="部门编号"
-                    width="180">
-            </el-table-column>
-            <el-table-column
-                    prop="address"
-                    label="部门简称">
-            </el-table-column>
-            <el-table-column
-                    prop="name"
-                    label="负责人">
-            </el-table-column>
-            <el-table-column
-                    prop="tel"
-                    label="电话号">
-            </el-table-column>
-            <el-table-column
-                    prop="ext"
-                    label="分机号">
-            </el-table-column>
-            <el-table-column
-                    prop="address"
-                    label="备注">
+                    v-for="item in extendheader"
+                    :prop=item.prop
+                    :label=item.label
+                    :width=item.width
+            >
             </el-table-column>
         </el-table>
         <el-pagination
-                @size-change="handleSizeChange"
-                @current-change="handleCurrentChange"
+                @size-change="handlesizechange"
+                @current-change="handlecurrentchange"
                 :current-page="currentPage"
                 :page-sizes="[30, 60, 90, 120]"
                 :page-size="30"
                 layout="total, sizes, prev, pager, next, jumper"
-                :total="200">
+                :total="extendrecords">
         </el-pagination>
     </div>
 </template>
@@ -53,23 +31,20 @@
 <script>
     export default {
         name: "Form",
+        props:['extendheader','extenddata','extendrecords'],
         data(){
             return{
-                currentPage: 4,
-                tableData: []
+                currentPage: 1,
+                tableHeight: window.innerHeight-250,
             }
         },
         mounted(){
-            this.getData();
+
+        },
+        watch:{
+
         },
         methods: {
-            getData(){
-                this.axios.get('/api/data')
-                    .then(res => {
-                        console.log(res);
-                        this.tableData=res.data.data
-                    });
-            },
             tableRowClassName({row, rowIndex}) {
                 if (rowIndex === 1) {
                     return 'warning-row';
@@ -78,11 +53,14 @@
                 }
                 return '';
             },
-            handleSizeChange(val) {
-                console.log(`每页 ${val} 条`);
+            handlesizechange(val) {
+                this.$emit("handlesizechange", val);
+                // console.log(`每页 ${val} 条`);
             },
-            handleCurrentChange(val) {
-                console.log(`当前页: ${val}`);
+            handlecurrentchange(val) {
+                this.currentPage=val;
+                this.$emit("handlecurrentchange", val);
+                // console.log(`当前页: ${val}`);
             }
         },
     }

@@ -3,11 +3,14 @@
         <el-table
                 :data="extenddata"
                 :max-height="tableHeight"
+                :height="tableHeight"
                 style="width: 100%;"
                 border
                 size="small"
+                :row-style="{height:'24px'}"
                 highlight-current-row
-                :row-class-name="tableRowClassName">
+                :row-class-name="tableRowClassName"
+        >
             <el-table-column
                     v-for="item in extendheader"
                     :prop=item.prop
@@ -29,13 +32,14 @@
 </template>
 
 <script>
+    // 仅适用于无formatter的表格，如需formatter则直接将表格数据等写一张页面上比较好
     export default {
         name: "Form",
-        props:['extendheader','extenddata','extendrecords'],
+        props:['extendheader','extenddata','extendrecords','shrinkHeight'],
         data(){
             return{
                 currentPage: 1,
-                tableHeight: window.innerHeight-250,
+                tableHeight:this.shrinkHeight? window.innerHeight-250-this.shrinkHeight:window.innerHeight-250,
             }
         },
         mounted(){
@@ -43,6 +47,12 @@
         },
         watch:{
 
+        },
+        computed:{
+            formatterData(){
+
+                this.formatterItem.includes('{{item.prop}}')
+            }
         },
         methods: {
             tableRowClassName({row, rowIndex}) {
@@ -61,7 +71,7 @@
                 this.currentPage=val;
                 this.$emit("handlecurrentchange", val);
                 // console.log(`当前页: ${val}`);
-            }
+            },
         },
     }
 </script>

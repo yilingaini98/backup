@@ -30,8 +30,8 @@ Mock.mock('/api/DataDictionary', (req, res) => {
                 ItemName: '@natural',
                 ItemValue: '@name',
                 Simplicity: '@date("yyyy-MM-dd")',
-                Sortable:'@name',
-                EnabledMark:'true',
+                'Sortable|+1': 1,
+                EnabledMark: '@name',
                 Mark:'@zip'
             }]
         },
@@ -47,10 +47,12 @@ Mock.mock('/api/Tree', (req, res) => {
         {
             'data|2-15':[{
                 'id|+1': 1,
-                label: '@name',
+                name:'@last()',
+                label: '@county',
                 children: [{
-                    'id|+1': 1000,
-                    label: '@name',
+                    'fields|+1': 1000,
+                    name:'@last()',
+                    label: '@county',
                 }]
             }],
         },

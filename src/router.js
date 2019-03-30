@@ -8,9 +8,14 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: '首页',
+      name: 'Layout',
       component: Home,
       children: [
+        {
+          path: '/Home',
+          name: 'Home',
+          component: () => import('./views/Home/Home')
+        },
         {
           path: '/Company',
           name: 'Company',

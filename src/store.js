@@ -24,11 +24,16 @@ const getFormData={
   },
   mutations:{
     getFormData(state,searchCriteria){//传入搜索条件，axios查询
-      axios.post('/api/'+searchCriteria.pagePath,JSON.stringify(searchCriteria))
-      .then(res => {
-          state.resData=res.data[0].data;
-          state.records=res.data[1].pageparam.records;
-      });
+      if(searchCriteria=="DataDictionary"){
+
+
+      }else{
+        axios.post('/api/'+searchCriteria.pagePath,JSON.stringify(searchCriteria))
+            .then(res => {
+              state.resData=res.data[0].data;
+              state.records=res.data[1].pageparam.records;
+        });
+      }
     }
   }
 };
@@ -55,8 +60,6 @@ const getTabData={
   },
   mutations:{
     getTabData(state,tabPath){
-      // tabPath.filter(d=>d);
-
       let namesData=[];
       state.resData.forEach(function(value, index, array) {
         namesData.push(value.name);

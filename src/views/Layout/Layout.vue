@@ -21,6 +21,7 @@
                     @tab-click="handleClick"
                     closable
                     @tab-remove="removeTab">
+                <el-tab-pane label="首页" name="Home"></el-tab-pane>
                 <el-tab-pane
                         v-for="(item, index) in resCurrentPath"
                         :key="item.name"
@@ -54,8 +55,11 @@
         data(){
             return{
                 resCurrentPath:[],
-                editableTabsValue:"",
+                editableTabsValue:"Home",
             }
+        },
+        mounted(){
+          this.$router.push("Home");
         },
         computed: {
 
@@ -65,6 +69,7 @@
                 let that=this;
                 that.$store.commit("getTabData",path);
                 this.resCurrentPath=this.$store.state.getTabData.resData;
+                this.editableTabsValue=path.name;
             },
             handleClick(tab, event) {
                 let that=this;
@@ -73,16 +78,18 @@
             removeTab(targetName){
                 let tabs = this.resCurrentPath;
                 let activeName = this.editableTabsValue;
-                if (activeName === targetName) {
-                    tabs.forEach((tab, index) => {
-                        if (tab.name === targetName) {
-                            let nextTab = tabs[index + 1] || tabs[index - 1];
-                            if (nextTab) {
-                                activeName = nextTab.name;
-                            }
+                let nextTab="";
+                // console.log(activeName+"||"+targetName)
+                tabs.forEach((tab, index) => {
+                    if (tab.name === targetName) {
+                        nextTab = tabs[index + 1] || tabs[index - 1];
+                        if (nextTab) {
+                            activeName = nextTab.name;
                         }
-                    });
-                }
+                    }
+                });
+                tabs.length==1?this.$router.push("Home"):this.$router.push(nextTab.name);
+
                 this.editableTabsValue = activeName;
                 this.resCurrentPath = tabs.filter(tab => tab.name !== targetName);
                 let namesData=[];
@@ -101,6 +108,6 @@
     .el-aside {background-color: #D3DCE6;color: #333;text-align: center;line-height: 200px;height: 100%;}
 
     .el-main {background-color: #FFF;color: #333;text-align: center; }
-    .el-tabs--top{height: 20px;line-height: 20px; padding-bottom: 30px;}
+    .el-tabs--top{height: 20px;line-height: 20px; padding-bottom: 20px;}
     .el-container{ height: 100%;}
 </style>

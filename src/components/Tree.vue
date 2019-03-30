@@ -13,7 +13,9 @@
               node-key="id"
               :filter-node-method="filterNode"
               :props="defaultProps"
-              ref="tree">
+              ref="tree"
+              @node-click="handleNodeClick"
+      >
       </el-tree>
     </div>
 </template>
@@ -41,7 +43,10 @@
             filterNode(value, data) {
                 if (!value) return true;
                 return data.label.indexOf(value) !== -1;
-            }
+            },
+            handleNodeClick(data) {
+                this.$emit("currenttreeselect", data);
+            },
         },
     }
 </script>

@@ -2,7 +2,7 @@
    <div>
       <div  style="float: left;line-height: 60px;font-size: 28px;color: #000;cursor: pointer">
           <i class="el-icon-menu" @click="toggleSideBar"></i>
-          <span style="font-size: 14px;padding-left:20px;">SystemIframe</span>
+          <span style="font-size: 26px;padding-left:20px;">SystemIframe</span>
       </div>
        <div style="text-align: right; font-size: 12px;float: right;color:#000;padding-right: 20px;">
            <el-dropdown>

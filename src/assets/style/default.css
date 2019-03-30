@@ -29,9 +29,16 @@ html,body,#app{
 /*导航标签样式开始*/
 .el-tabs__item{border: 1px solid #f0f0f0;border-radius:4px;background: #FFF;height: 30px;line-height: 30px;color: #888;padding: 0 16px!important;margin:5px;}
 .el-tabs__nav-scroll{padding-left:10px;background-color:#F5F7FA}
-.el-tabs__item.is-active{color:#fff;background-color:#ffc300}
+.el-tabs__item.is-active{color:#fff;background-color:#FFD700}
 .el-tabs__active-bar{background-color:#E4E7ED;}
-
+#tab-Home span{display: none!important;}/*第一个标签不能被关闭*/
 /*导航标签样式结束*/
 
 .el-form-item__content{text-align: left;}/*表格项靠左*/
+
+.el-card__header{font-size:12px;padding:5px 10px;text-align: left}/*表格外套card样式*/
+
+.el-menu-item.is-active{color:#eac100!important;}/*左侧导航样式*/
+
+.el-table--small td, .el-table--small th{padding:4px 0}/*表格行高padding*/
+

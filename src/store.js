@@ -23,7 +23,7 @@ const getFormData={
     records:0,
   },
   mutations:{
-    getData(state,searchCriteria){//传入搜索条件，axios查询
+    getFormData(state,searchCriteria){//传入搜索条件，axios查询
       axios.post('/api/'+searchCriteria.pagePath,JSON.stringify(searchCriteria))
       .then(res => {
           state.resData=res.data[0].data;
@@ -33,11 +33,51 @@ const getFormData={
   }
 };
 
+//Tree获取值的公共方法
+const getTreeData={
+  state:{
+    resData:[],
+  },
+  mutations:{
+    getTreeData(state,searchCriteria){//传入搜索条件，axios查询
+      axios.post('/api/Tree',JSON.stringify(searchCriteria))
+          .then(res => {
+            state.resData=res.data[0].data;
+          });
+    }
+  }
+};
+
+//Tab处理
+const getTabData={
+  state:{
+    resData:[],
+  },
+  mutations:{
+    getTabData(state,tabPath){
+      // tabPath.filter(d=>d);
+
+      let namesData=[];
+      state.resData.forEach(function(value, index, array) {
+        namesData.push(value.name);
+      });
+      if(tabPath.length>=0){
+        state.resData=tabPath;
+      }
+      else if(!namesData.includes(tabPath.name)){
+        state.resData.push(tabPath);
+      }
+    }
+  }
+};
+
 
 
 export default new Vuex.Store({
   modules:{
     toggleSideBar:toggleSideBar,
-    getFormData:getFormData
+    getFormData:getFormData,
+    getTreeData:getTreeData,
+    getTabData:getTabData
   }
 });

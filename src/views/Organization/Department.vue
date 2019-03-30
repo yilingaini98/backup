@@ -1,38 +1,6 @@
 <template>
     <div>
-       <div class="searchArea">
-          <div class="searchGroup">
-             <div>
-                 <span class="searchContent">选择条件</span>
-                 <el-select v-model="value" placeholder="请选择" size="small">
-                     <el-option
-                             v-for="item in options"
-                             :key="item.value"
-                             :label="item.label"
-                             :value="item.value">
-                     </el-option>
-                 </el-select>
-             </div>
-              <div>
-                  <el-input v-model="input" placeholder="请输入内容" size="small"></el-input>
-              </div>
-              <div>
-                  <el-button type="primary" size="small">查询</el-button>
-              </div>
-          </div>
-
-           <div class="btnGroup">
-               <el-button-group>
-                   <el-button icon="el-icon-edit" size="small"></el-button>
-                   <el-button icon="el-icon-edit-outline" size="small"></el-button>
-                   <el-button icon="el-icon-delete" size="small"></el-button>
-               </el-button-group>
-           </div>
-       </div>
-
-
-        <alForm></alForm>
-
+        部门部门
     </div>
 </template>
 

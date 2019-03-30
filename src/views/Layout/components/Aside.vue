@@ -1,8 +1,7 @@
 <template>
    <div>
        <el-menu class="el-menu-vertical-demo"
-                @open="handleOpen"
-                @close="handleClose"
+                @select="handleSelect"
                 :collapse="isCollapse"
                 background-color="#263445"
                 text-color="#fff"
@@ -58,12 +57,13 @@
             immediate: true
         },
         methods: {
-            handleOpen(key, keyPath) {
-                console.log(key, keyPath);
+            handleSelect(key, keyPath,item) {
+                let path={
+                        title:item.$el.innerText,
+                        name: keyPath[1].slice(1),
+                    };
+                this.$emit("handlecurrentpath", path);
             },
-            handleClose(key, keyPath) {
-                console.log(key, keyPath);
-            }
         }
     }
 </script>

@@ -42,4 +42,18 @@ Mock.mock('/api/DataDictionary', (req, res) => {
         }
     ])
 });
+Mock.mock('/api/Tree', (req, res) => {
+    return Mock.mock([
+        {
+            'data|2-15':[{
+                'id|+1': 1,
+                label: '@name',
+                children: [{
+                    'id|+1': 1000,
+                    label: '@name',
+                }]
+            }],
+        },
+    ])
+});
 

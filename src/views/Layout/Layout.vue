@@ -2,24 +2,34 @@
     <el-container>
         <el-scrollbar style="height:100%">
             <el-aside width="200px;">
-                <leftAside style="text-align: left;overflow-x: hidden;height:100%"></leftAside>
+                <alAside
+                        style="text-align: left;overflow-x: hidden;height:100%"
+                        @handlecurrentpath="currentPath"
+                ></alAside>
             </el-aside>
         </el-scrollbar>
 
 
         <el-container>
             <el-header style="border-bottom:1px solid #F7F7F7">
-                <navBar></navBar>
+                <alNavBar></alNavBar>
             </el-header>
 
-           <div style="height: 40px;">
-               <el-tabs @tab-click="handleClick" style="padding:0 10px;">
-                   <el-tab-pane label="用户管理" name="first" closable>用户管理</el-tab-pane>
-                   <el-tab-pane label="配置管理" name="second" closable></el-tab-pane>
-                   <el-tab-pane label="角色管理" name="third" closable></el-tab-pane>
-                   <el-tab-pane label="定时任务补偿" name="fourth" closable></el-tab-pane>
-               </el-tabs>
-           </div>
+
+            <el-tabs
+                    v-model="editableTabsValue"
+                    @tab-click="handleClick"
+                    closable
+                    @tab-remove="removeTab">
+                <el-tab-pane
+                        v-for="(item, index) in resCurrentPath"
+                        :key="item.name"
+                        :label="item.title"
+                        :name="item.name"
+                >
+                </el-tab-pane>
+            </el-tabs>
+
 
             <el-scrollbar style="height:100%">
                 <el-main>
@@ -33,27 +43,53 @@
 </template>
 
 <script>
-    import leftAside from './components/Aside'
-    import navBar from './components/NavBar'
+    import alAside from './components/Aside'
+    import alNavBar from './components/NavBar'
     export default {
         name: "Layout",
         components:{
-            leftAside,
-            navBar
+            alAside,
+            alNavBar,
         },
         data(){
             return{
-
+                resCurrentPath:[],
+                editableTabsValue:"",
             }
         },
-        watch: {
-            '$route'(to, from) {
-                // 对路由变化作出响应...
-            }
+        computed: {
+
         },
         methods:{
-            handleClick(){
-
+            currentPath(path) {
+                let that=this;
+                that.$store.commit("getTabData",path);
+                this.resCurrentPath=this.$store.state.getTabData.resData;
+            },
+            handleClick(tab, event) {
+                let that=this;
+                that.$router.push(tab.name);
+            },
+            removeTab(targetName){
+                let tabs = this.resCurrentPath;
+                let activeName = this.editableTabsValue;
+                if (activeName === targetName) {
+                    tabs.forEach((tab, index) => {
+                        if (tab.name === targetName) {
+                            let nextTab = tabs[index + 1] || tabs[index - 1];
+                            if (nextTab) {
+                                activeName = nextTab.name;
+                            }
+                        }
+                    });
+                }
+                this.editableTabsValue = activeName;
+                this.resCurrentPath = tabs.filter(tab => tab.name !== targetName);
+                let namesData=[];
+                this.resCurrentPath.forEach(function(value, index, array) {
+                    namesData.push(value.name);
+                });
+                this.$store.commit("getTabData",this.resCurrentPath);
             }
         }
     }

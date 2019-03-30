@@ -1,18 +1,15 @@
 <template>
     <div>
         <el-row :gutter="20">
-            <el-col :span="3">
-                <el-tree
-                        :data="data2"
-                        show-checkbox
-                        :default-expand-all="true"
-                        node-key="id"
-                        :props="defaultProps">
-                </el-tree>
+            <el-col :span="3" :lg="3" :md="5">
+                <alDataDictionaryTree :extendtreedata="treeData">
+
+                </alDataDictionaryTree>
             </el-col>
-            <el-col :span="21" style="border-left:1px solid #CCC">
-                <div class="searchArea">
-                    <div class="searchGroup">
+
+            <el-col :span="21" :lg="21" :md="19" style="border-left:1px solid #CCC;padding:0 30px;">
+                <el-row :gutter="20" justify="space-between" type="flex">
+                    <el-col :span="18"  style="text-align: left">
                         <el-form :inline="true"  class="demo-form-inline">
                             <el-form-item  label="选择条件">
                                 <el-select v-model="selectValue" placeholder="请选择" size="small">
@@ -32,16 +29,16 @@
                                 <el-button type="primary" @click="search" size="small">查询</el-button>
                             </el-form-item>
                         </el-form>
-                    </div>
+                    </el-col>
 
-                    <div class="btnGroup">
+                    <el-col :span="6"  style="text-align: right;padding-top: 5px;">
                         <el-button-group>
                             <el-button icon="el-icon-edit" size="small" @click="newDialogForm"></el-button>
                             <el-button icon="el-icon-edit-outline" size="small" @click="editDialogForm"></el-button>
                             <el-button icon="el-icon-delete" size="small"></el-button>
                         </el-button-group>
-                    </div>
-                </div>
+                    </el-col>
+                </el-row>
 
                 <alForm :extendheader="tableHeader"
                         :extenddata="tableData"
@@ -67,46 +64,16 @@
 <script>
     import alForm from '../../components/Form'
     import alDialogForm from '../../components/DialogForm'
+    import alDataDictionaryTree from '../../components/Tree'
     export default {
         name: "DataDictionary",
         components:{
             alForm,
-            alDialogForm
+            alDialogForm,
+            alDataDictionaryTree
         },
         data(){
             return{
-                data2: [{
-                    id: 1,
-                    label: '一级 1',
-                    children: [{
-                        id: 4,
-                        label: '二级 1-1',
-                    }]
-                }, {
-                    id: 2,
-                    label: '一级 2',
-                    children: [{
-                        id: 5,
-                        label: '二级 2-1'
-                    }, {
-                        id: 6,
-                        label: '二级 2-2'
-                    }]
-                }, {
-                    id: 3,
-                    label: '一级 3',
-                    children: [{
-                        id: 7,
-                        label: '二级 3-1'
-                    }, {
-                        id: 8,
-                        label: '二级 3-2'
-                    }]
-                }],
-                defaultProps: {
-                    children: 'children',
-                    label: 'label'
-                },
                 selectValue: '',
                 searchContent: '',
                 tableHeader:[{
@@ -165,11 +132,19 @@
                 let content = this.tableHeader;
                 return content;
             },
+            treeData(){
+                let resData = this.$store.state.getTreeData.resData;
+                return resData;
+            }
         },
         mounted(){
             this.search();
+            this.treeInit();
         },
         methods: {
+            treeInit(){
+                this.$store.commit("getTreeData");
+            },
             search(){
                 let param={
                     selected:this.selectValue,
@@ -178,7 +153,7 @@
                     currentPage:this.currentPage,
                     pagePath:"DataDictionary"
                 };
-                this.$store.commit("getData",param);
+                this.$store.commit("getFormData",param);
             },
             getcurrentPage(currPage){
                 this.currentPage=currPage;

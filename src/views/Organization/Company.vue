@@ -1,36 +1,36 @@
 <template>
-    <div>
-       <div class="searchArea">
-          <div class="searchGroup">
-              <el-form :inline="true"  class="demo-form-inline">
-                  <el-form-item  label="选择条件">
-                      <el-select v-model="selectValue" placeholder="请选择" size="small">
-                          <el-option
-                              v-for="item in tableHeader"
-                              :key="item.prop"
-                              :label="item.label"
-                              :value="item.prop"
-                          >
-                          </el-option>
-                      </el-select>
-                  </el-form-item>
-                  <el-form-item>
-                      <el-input v-model="searchContent" placeholder="请输入内容" size="small"></el-input>
-                  </el-form-item>
-                  <el-form-item>
-                      <el-button type="primary" @click="search" size="small">查询</el-button>
-                  </el-form-item>
-              </el-form>
-          </div>
+    <div style="padding:0 20px;">
+        <el-row :gutter="20" justify="space-between" type="flex">
+            <el-col :span="18"  style="text-align: left">
+                <el-form :inline="true"  class="demo-form-inline">
+                    <el-form-item  label="选择条件">
+                        <el-select v-model="selectValue" placeholder="请选择" size="small">
+                            <el-option
+                                    v-for="item in tableHeader"
+                                    :key="item.prop"
+                                    :label="item.label"
+                                    :value="item.prop"
+                            >
+                            </el-option>
+                        </el-select>
+                    </el-form-item>
+                    <el-form-item>
+                        <el-input v-model="searchContent" placeholder="请输入内容" size="small"></el-input>
+                    </el-form-item>
+                    <el-form-item>
+                        <el-button type="primary" @click="search" size="small">查询</el-button>
+                    </el-form-item>
+                </el-form>
+            </el-col>
+            <el-col :span="6"  style="text-align: right;padding-top: 5px;">
+                <el-button-group>
+                    <el-button icon="el-icon-edit" size="small" @click="newDialogForm"></el-button>
+                    <el-button icon="el-icon-edit-outline" size="small" @click="editDialogForm"></el-button>
+                    <el-button icon="el-icon-delete" size="small"></el-button>
+                </el-button-group>
+            </el-col>
+        </el-row>
 
-           <div class="btnGroup">
-               <el-button-group>
-                   <el-button icon="el-icon-edit" size="small" @click="newDialogForm"></el-button>
-                   <el-button icon="el-icon-edit-outline" size="small" @click="editDialogForm"></el-button>
-                   <el-button icon="el-icon-delete" size="small"></el-button>
-               </el-button-group>
-           </div>
-       </div>
 
         <alForm :extendheader="tableHeader"
                 :extenddata="tableData"
@@ -130,7 +130,7 @@
                     currentPage:this.currentPage,
                     pagePath:"Company"
                 };
-                this.$store.commit("getData",param);
+                this.$store.commit("getFormData",param);
             },
             getcurrentPage(currPage){
                 this.currentPage=currPage;

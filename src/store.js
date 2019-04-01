@@ -24,16 +24,11 @@ const getFormData={
   },
   mutations:{
     getFormData(state,searchCriteria){//传入搜索条件，axios查询
-      if(searchCriteria=="DataDictionary"){
-
-
-      }else{
-        axios.post('/api/'+searchCriteria.pagePath,JSON.stringify(searchCriteria))
-            .then(res => {
-              state.resData=res.data[0].data;
-              state.records=res.data[1].pageparam.records;
-        });
-      }
+      axios.post('/api/'+searchCriteria.pagePath,JSON.stringify(searchCriteria))
+          .then(res => {
+            state.resData=res.data[0].data;
+            state.records=res.data[1].pageparam.records;
+          });
     }
   }
 };

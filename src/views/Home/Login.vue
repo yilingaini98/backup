@@ -23,7 +23,7 @@
                             prefix-icon="el-icon-tickets"
                     >
                     </el-input>
-                    <span>验证码</span>
+                    <span>验证码区域</span>
                     <span>换一组</span>
                 </li>
             </ul>

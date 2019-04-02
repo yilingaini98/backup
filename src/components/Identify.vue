@@ -68,7 +68,7 @@
             },
             // 生成一个随机的颜色
             randomColor (min, max) {
-                let r = this.randomNum(min, max)
+                let r = this.randomNum(min, max);
                 let g = this.randomNum(min, max)
                 let b = this.randomNum(min, max)
                 return 'rgb(' + r + ',' + g + ',' + b + ')'

@@ -27,6 +27,10 @@ import './mock.js'
 //路由重定向
 //import './permission' // permission control
 
+// 全局注册图形验证码组件
+import SIdentify from './components/Identify.vue'
+Vue.component('SIdentify',SIdentify);
+
 Vue.config.productionTip = false;
 
 new Vue({

@@ -2,40 +2,48 @@
     <div class="loginBackground">
         <div class="loginArea">
             <h3>****   欢迎登录   ****</h3>
-            <ul :rules="ruleInline">
-                <li>
+            <el-form :model="formInline" :rules="ruleInline" ref="formInline">
+                <el-form-item prop="userName">
                     <el-input
                             placeholder="请输入用户名"
                             prefix-icon="el-icon-tickets"
+                            v-model="formInline.userName"
                     >
                     </el-input>
-                </li>
-                <li>
+                </el-form-item>
+                <el-form-item prop="password">
                     <el-input
                             placeholder="请输入密码"
                             show-password
                             prefix-icon="el-icon-tickets"
+                            v-model="formInline.password"
                     >
                     </el-input>
-                </li>
-                <li>
-                    <el-input
-                            placeholder="验证码"
-                            prefix-icon="el-icon-tickets"
-                    >
-                    </el-input>
-                    <span>
-                         <div class="code" style="margin-left:12px;">
-                            <SIdentify :identifyCode="identifyCode"></SIdentify>
-                        </div>
-                    </span>
-                    <span @click="refreshCode" style="cursor: pointer">换一组</span>
-                </li>
-            </ul>
-
-            <div class="loginBtn">
-                <el-button type="primary" @click="userLogin">登录</el-button>
-            </div>
+                </el-form-item>
+                <el-form-item prop="YZM">
+                   <el-row>
+                       <el-col :span="10">
+                           <el-input
+                                   placeholder="验证码"
+                                   prefix-icon="el-icon-tickets"
+                                   v-model="formInline.YZM"
+                           >
+                           </el-input>
+                       </el-col>
+                       <el-col :span="8">
+                           <div class="code" style="margin-left:12px;">
+                               <SIdentify :identifyCode="identifyCode"></SIdentify>
+                           </div>
+                       </el-col>
+                       <el-col :span="6">
+                           <div @click="refreshCode" style="cursor: pointer;text-align: center;color:#4091FF">换一组</div>
+                       </el-col>
+                   </el-row>
+                </el-form-item>
+                <el-form-item>
+                    <el-button type="primary" long @click="userLogin">登录</el-button>
+                </el-form-item>
+            </el-form>
         </div>
     </div>
 </template>
@@ -68,7 +76,7 @@
                 }
             };
             return{
-                formInlinePassword: {
+                formInline: {
                     userName:'',
                     password:'',
                     YZM:''
@@ -132,29 +140,14 @@
         height:400px;
         width:250px;
         background: rgba(26,43,78,0.5);
-        padding:0 4rem;
+        padding:0 3rem;
     }
     .loginArea h3{
         font-size: 24px;
         color:#FFF;
         padding: 1rem 0;
     }
-    .loginArea ul{
-        padding-left: 0;
-    }
-    .loginArea li{
-        height: 36px;
-        width:100%;
-        line-height: 36px;
-        color:#FFF;
-        display: flex;
-        padding:0.5rem 0;
-    }
-.loginArea li>span{
-    width:10rem;
-    height: 36px;
-    line-height: 36px;
-}
+
 
     .loginBtn{
         padding-top:20px;
@@ -163,9 +156,5 @@
     width:100%
 }
 
-.code {
-    width: 80px;
-    height: 100%;
-    border: 1px solid #cccccc;
-}
+
 </style>

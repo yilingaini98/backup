@@ -118,7 +118,7 @@
                 }
             },
             userLogin(){
-
+                this.$router.push("/Layout")
             }
         }
     }
@@ -148,10 +148,14 @@
         padding: 1rem 0;
     }
 
+.el-form-item{
+    margin-bottom: 22px;
+}
 
-    .loginBtn{
-        padding-top:20px;
-    }
+.el-row{
+    line-height: 28px;
+}
+
 .el-button--primary{
     width:100%
 }

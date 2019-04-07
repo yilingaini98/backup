@@ -19,7 +19,7 @@ export default new Router({
         {
           path: '/Home',
           name: 'Home',
-          component: () => import('./views/Home/Login')
+          component: () => import('./views/Home/Home')
         },
         {
           path: '/Company',

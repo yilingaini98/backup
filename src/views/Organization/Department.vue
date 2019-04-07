@@ -72,7 +72,7 @@
                     label:"部门编号",
                     type:"string",
                     value:"",
-                    width:"150",
+                    width:"100",
                 },{
                     prop:"D_ShortName",
                     label:"部门简称",
@@ -90,7 +90,7 @@
                     label:"负责人",
                     type:"string",
                     value:"",
-                    width:"200",
+                    width:"100",
                 },{
                     prop:"D_OuterPhone",
                     label:"电话号",
@@ -102,7 +102,7 @@
                     label:"分机号",
                     type:"string",
                     value:"",
-                    width:"150",
+                    width:"100",
                 },{
                     prop:"D_Description",
                     label:"备注",

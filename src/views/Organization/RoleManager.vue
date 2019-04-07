@@ -29,7 +29,7 @@
                     <el-button icon="el-icon-delete" size="small"></el-button>
                 </el-button-group>
                 <el-button type="success" icon="el-icon-info" size="small" style="margin-left:10px;" @click="userTransfer">成员配置</el-button>
-                <el-button type="danger" icon="el-icon-star-on" size="small" style="margin-left:10px;" @click="roleDialogForm">权限配置</el-button>
+                <el-button type="danger" icon="el-icon-star-on" size="small" style="margin-left:10px;" @click="roleDialogVisible = true">权限配置</el-button>
             </el-col>
         </el-row>
 
@@ -49,10 +49,93 @@
         ></alDialogForm>
 
 
+
+        <el-dialog title="权限配置" :visible.sync="roleDialogVisible">
+            <el-steps :active="currentStep" simple>
+                <el-step title="功能模块" icon="el-icon-edit"></el-step>
+                <el-step title="按钮显示" icon="el-icon-upload"></el-step>
+                <el-step title="完成" icon="el-icon-picture"></el-step>
+            </el-steps>
+
+            <div style="padding:20px;text-align: left" v-if="currentStep==1">
+                <el-checkbox :indeterminate="isIndeterminate" v-model="checkAll" @change="handleCheckAllChange">全选</el-checkbox>
+                <div style="margin: 15px 0;"></div>
+                <el-checkbox-group v-model="checkedNavs" @change="handleCheckedNavsChange">
+                    <el-checkbox border
+                                 v-for="nav in navs"
+                                 :label="nav.path"
+                                 :key="nav.path">{{nav.name}}</el-checkbox>
+                </el-checkbox-group>
+            </div>
+            <div v-else-if="currentStep==2">
+                <div style="margin: 15px 0;">
+                    <el-table
+                            :data="btnRoleTable"
+                            stripe
+                            style="width: 100%">
+                        <el-table-column
+                                prop="nav"
+                                label="功能模块"
+                                width="300">
+                        </el-table-column>
+                        <el-table-column
+                                prop="btn"
+                                label="按钮权限"
+                                width="300">
+                            <template slot-scope="scope">
+                                <el-tag v-for="item in scope.row.btn"
+                                        :type="item === 'delete' ? 'primary' : 'success'"
+                                        @click="handleTagClick(item)">{{item}}</el-tag>
+                            </template>
+                        </el-table-column>
+                    </el-table>
+                </div>
+            </div>
+            <div v-else-if="currentStep==3">
+                <div>老三</div>
+            </div>
+            <div slot="footer" class="dialog-footer">
+                <el-button @click="dialogFormVisible = false">取 消</el-button>
+                <el-button type="primary" @click="nextStep(currentStep)">{{submitTxt}}</el-button>
+            </div>
+        </el-dialog>
+
     </div>
 </template>
 
 <script>
+    const navOptions = [
+        {
+            path:'Company',
+            name:'公司管理'
+        },
+        {
+            path:'Department',
+            name:'部门管理'
+        },
+        {
+            path:'Personnel',
+            name:'人员管理'
+        },
+        {
+            path:'RoleManager',
+            name:'角色管理'
+        },
+        {
+            path:'DataDictionary',
+            name:'数据字典'
+        }];//菜单列表
+    const btnOptions=[
+        {
+            value: '1',
+            label: '新增'
+        }, {
+            value: '2',
+            label: '编辑'
+        }, {
+            value: '3',
+            label: '删除'
+        }];//按钮列表
     import alForm from '../../components/Form'
     import alDialogForm from '../../components/DialogForm'
     export default {
@@ -65,7 +148,8 @@
             return{
                 selectValue: '',
                 searchContent: '',
-                tableHeader:[{
+                tableHeader:[
+                    {
                     prop:"R_EnCode",
                     label:"角色编号",
                     type:"string",
@@ -106,6 +190,29 @@
                 currentPage:"1",//默认开始页
                 dialogVisible: false,
                 dialogTitle:'',//弹层标题
+                roleDialogVisible:false,
+                roleDialogForm:'',
+                checkAll: true,
+                checkedNavs: [],
+                navs: navOptions,
+                isIndeterminate: true,
+                currentStep:1,
+                submitTxt:'下一步',
+                btns:btnOptions,
+                checkedBtn:[],
+                btnRoleTable: [{
+                    nav: 'Company',
+                    btn: ['add','edit','delete'],
+                }, {
+                    nav: 'Department',
+                    btn: ['add','edit','delete'],
+                }, {
+                    nav: 'Personnel',
+                    btn: ['add','edit','delete'],
+                }, {
+                    nav: 'RoleManager',
+                    btn: ['add','edit','delete'],
+                }]
             }
         },
         computed: {
@@ -155,16 +262,48 @@
             changeDialogStatus(){
                 this.dialogVisible=!this.dialogVisible;
             },
-            roleDialogForm(){
-
+            handleCheckAllChange(val) {
+                let _optionPath=[];
+                navOptions.forEach((item,index)=>{
+                    _optionPath.push(item.path);
+                });
+                this.checkedNavs = val ? _optionPath : [];
+                this.isIndeterminate = false;
+            },
+            handleCheckedNavsChange(value) {
+                let checkedCount = value.length;
+                this.checkAll = checkedCount === this.navs.length;
+                this.isIndeterminate = checkedCount > 0 && checkedCount < this.navs.length;
+            },
+            nextStep(currentStep){
+                this.currentStep=currentStep+1;
+                if( currentStep==2){
+                    this.submitTxt='完成';
+                }else if( currentStep==3){
+                    this.roleDialogVisible=false;
+                    this.submitTxt='下一步';
+                    this.currentStep=1;
+                }
             },
             userTransfer(){
 
             },
+            handleTagClick(tag){
+                console.log(tag)
+            }
         },
     }
 </script>
 
 <style scoped>
-
+    .el-checkbox.is-bordered
+    {
+        margin:10px;
+    }
+    .el-input__inner{
+        width:230px;
+    }
+    .el-tag{
+        margin:0 5px;
+    }
 </style>

@@ -42,3 +42,5 @@ html,body,#app{
 
 .el-table--small td, .el-table--small th{padding:4px 0}/*表格行高padding*/
 
+.el-select__tags{ max-width:220px!important;}/*select多选时选中宽度*/
+
